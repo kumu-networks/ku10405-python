@@ -17,7 +17,7 @@ class KU10405:
     # rising edge of the apply pin indicates that settings should be applied. Trim bits are
     # programmed when the apply pin is high while CS is low during the rising edge of the first
     # clock cycle.
-    APPLY_PIN = 8
+    APPLY_PIN = 7
 
     def __init__(self, readback=True):
         """An FT232H chip must be connected to your computer for this constructor to succeed. It
