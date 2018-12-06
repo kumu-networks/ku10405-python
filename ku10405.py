@@ -2,9 +2,8 @@ from pyftdi.spi import SpiController
 
 
 class KU10405:
-    """This class controls the KU10405 chip via an FT232H SPI controller. It requires that pyftdi be
-    installed (`pip3 install pyftdi`). Users should only concern themselves with the constructor and
-    set_tap method.
+    """This class controls the KU10405 chip via an FT232H SPI controller. Users should only concern
+    themselves with the constructor and set_tap method.
 
     Example usage:
         from ku10405 import KU10405
