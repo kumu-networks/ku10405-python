@@ -7,7 +7,7 @@ Ubuntu, Windows 10, and macOS Mojave.
 ## Dependencies/Installation
 
 To use thie API, you'll need the following:
-* python3
+* python3 (tested with 3.6, but any 3.x should work)
 * pyftdi
 * libusb
 
