@@ -67,7 +67,7 @@ class KU10405:
         if not all(isinstance(val, int) for val in (channel, mag, phase)):
             raise TypeError('Channel, magnitude, and phase must be integers')
         if not all(isinstance(val, bool) for val in (enable, apply)):
-            raise TypeError('Trim, enable, and apply must be bools')
+            raise TypeError('Enable and apply must be bools')
         if not 0 <= channel <= 3:
             raise ValueError('Address and channel must be in range [0, 3]')
         if not 0 <= mag <= 16383:
