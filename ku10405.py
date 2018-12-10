@@ -24,10 +24,10 @@ class KU10405:
         sets up the SPI/GPIO interface and configures readback.
 
         When readback is enabled, set_tap will throw an error if the readback of any write does not
-        match what was programmed. Readback has almost no impact on performance, so it's probably
-        not worth disabling. There are two important caveats to readback:
-            1. The appropriate switch on the board must be set for it to work.
-            2. Only 2/3 writes will be checked
+        match what was programmed. Readback does have an impact on performance because it requires
+        an extra SPI transaction for every call to set_tap, but for safety it should not be disabled
+        unless speed is your top priority. Note that for readback to work, the appropriate switch on
+        the board must be set.
 
         Args:
             readback (bool, optional): Set to False to disable readback error checking
@@ -79,12 +79,20 @@ class KU10405:
             self._write(channel, 'coarse', mag >> 9, phase >> 11, enable)
         fine_write, coarse_read = \
             self._write(channel, 'fine', (mag >> 4) & 0x1F, (phase >> 5) & 0x3F)
-        _, fine_read = \
+        trim_write, fine_read = \
             self._write(channel, 'trim', mag & 0xF, phase & 0x1F)
 
-        if self._readback and (coarse_write != coarse_read or fine_write != fine_read):
-            raise IOError('Readbacks do not match! Wrote coarse {}, fine {}, but read coarse {}, '
-                          'fine {}'.format(coarse_write, fine_write, coarse_read, fine_read))
+        if self._readback:
+            # Do a dummy write so we can get the trim readback. Note that this assumes we are not
+            # using address 3!
+            trim_read = self._spi.exchange((0xFFFF).to_bytes(2, byteorder='big'), duplex=True)
+            trim_read = (trim_read[0] << 8) | trim_read[1]
+
+            if coarse_write != coarse_read or fine_write != fine_read or trim_write != trim_read:
+                raise IOError(
+                    'Readbacks do not match! Wrote coarse {}, fine {}, trim {}, but '
+                    'read coarse {}, fine {}, trim {}'.format(coarse_write, fine_write, trim_write,
+                                                              coarse_read, fine_read, trim_read))
 
         if apply:
             self._set_apply(True)
