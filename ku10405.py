@@ -11,15 +11,13 @@ class KU10405:
         dut.set_tap(0, 100, 200)
     """
 
-    FTDI_URL = 'ftdi://ftdi:232h/1'
-
     # The apply pin both applies changes and indicates trim bits being set. When CS is high, a
     # rising edge of the apply pin indicates that settings should be applied. Trim bits are
     # programmed when the apply pin is high while CS is low during the rising edge of the first
     # clock cycle.
     APPLY_PIN = 7
 
-    def __init__(self, readback=True):
+    def __init__(self, readback=True, ftdi_url='ftdi://ftdi:232h/1'):
         """An FT232H chip must be connected to your computer for this constructor to succeed. It
         sets up the SPI/GPIO interface and configures readback.
 
@@ -36,7 +34,7 @@ class KU10405:
 
         # Setup SPI interface
         self._spi_controller = SpiController()
-        self._spi_controller.configure(self.FTDI_URL)
+        self._spi_controller.configure(ftdi_url)
         self._spi = self._spi_controller.get_port(cs=0, mode=0, freq=5e6)
 
         # Setup GPIO interface
