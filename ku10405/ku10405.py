@@ -75,8 +75,8 @@ class KU10405:
             channel (int): Which channel to set (range: [0-3])
             mag (int): 14-bit attenuation (range: [0, 2^14))
             phase (int): 16-bit phase (range: [0, 2^16))
-            apply (bool, optional): Set to False to disable this channel
-            enable (bool, optional): Set to False if you don't want to apply these changes yet
+            enable (bool, optional): Set to False to disable this channel
+            apply (bool, optional): Set to False if you don't want to apply these changes yet
 
         Raises:
             TypeError: raised if any arguments have the wrong type
