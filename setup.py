@@ -25,6 +25,7 @@ setup(
     version='1.0.0',
     packages=find_packages(),
     description='Driver for KU10405 chip evaluation board.',
+    url='https://kumunetworks.com/',
     author='Christian Hahn',
     author_email='christian@kumunetworks.com',
     license='',
