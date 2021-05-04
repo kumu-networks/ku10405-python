@@ -1,29 +1,22 @@
-# KU10405 API
+# ku10405-python
 
-This repo provides a simple interface for using the KU10405 chip. It has been tested successfully on
-Ubuntu, Windows 10, and macOS Mojave.
+## Abstract
 
+ku10405-python is a Python driver to control the KU10405 evaluation board.
 
-## Dependencies/Installation
+## Dependencies / Installation
 
-To use thie API, you'll need the following:
+To use this driver, you'll need the following:
 * python3 (tested with 3.6, but any 3.x should work)
 * pyftdi
-* libusb
+* libusb  (required by pyftdi)
 
 [Pyftdi's documentation](https://eblot.github.io/pyftdi/installation.html) provides comprehensive
-instructions for how to install libusb and pyftdi on any operating system. Follow the instructions
-for installing libusb, and then run `pip3 install pyftdi`.
-
-If you're using Windows, pay special attention to the instructions! Be sure to download the latest
-version (1.2.6.0 at the time of writing), and choose the `libusb-win32-devel-filter-1.2.6.0.exe`
-installer. After installation the installer will prompt you about whether you want to install a
-filter. Make sure your FTDI cable is plugged in, and then choose it as a filter. If you skip this
-step you'll get an error from pyftdi saying that it can't find the device.
+instructions for how to install pyftdi and libusb on any operating system.
 
 ## Usage
 
-The following is a basic example of how to use the API.
+The following is a basic example of how to use the driver.
 
 ```python
 from ku10405 import KU10405
