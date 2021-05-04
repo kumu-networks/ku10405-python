@@ -22,7 +22,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='ku10405',
-    version='1.0.0',
+    version='1.1.0',
     packages=find_packages(),
     description='Driver for KU10405 chip evaluation board.',
     url='https://kumunetworks.com/',
