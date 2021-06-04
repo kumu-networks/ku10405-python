@@ -55,7 +55,7 @@ class KU10405:
         # Setup SPI interface
         self._spi_controller = SpiController()
         self._spi_controller.configure(ftdi_url)
-        self._spi = self._spi_controller.get_port(cs=0, mode=0, freq=5e6)
+        self._spi = self._spi_controller.get_port(cs=0, mode=0, freq=1e6)
 
         # Setup GPIO interface
         self._gpio = self._spi_controller.get_gpio()
